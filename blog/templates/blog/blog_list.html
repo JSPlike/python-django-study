@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>my list template</title>
+</head>
+<body>
+	<div id="content">
+		<h1>Book mark blog</h1>
+		<ul>
+			<!-- 
+				장고에서는 명시적으로 지정하지 않아도 디폴트로 알아서 지정해 주는 두가지 속성이 있다.
+				첫번째는 텍스ㅡ 변수로 object_list를 사용하는 것이고, 두번째는 템플릿 파일을 [모델명소문자]_list.html형식의
+				이름으로 지정하는 것입니다....그래서 템플릿 파일명은 blog_list.html이 된것입니다.
+			-->
+			{% for blog in object_list %}
+				<!-- 여기서 {{blog}}는 템플릿 변수이며 Blog 테이블의 특정 레코드 하나를 뜻하며(즉 객체),
+					 해당 객체를 프린트하면 해당객체의 __str__() 메소드를 호출하여 그 결과를 출력합니다.
+					 즉, 우리는 model.py에서 __str__() 메소드를 정의 할때 return self.title이 객체의 제목을 출력하도록 정의했습니다.
+				-->
+				<li><a href="{%  url 'detail' blog.id %}">{{ blog }}</li> <!-- url형식은 /blog/1과 같은 형태이다. -->
+			{% endfor %}
+		</ul>
+	</div>
+</body>
+</html>
